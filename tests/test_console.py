@@ -535,6 +535,51 @@ class TestHBNBCommand(unittest.TestCase):
         expected_output = output
         self.assertEqual(output, expected_output)
 
+    def test_key_value_parser(self):
+        args1 = ['name="My_little_house"']
+        result1 = self.cmd_testing._key_value_parser(args1)
+        self.assertEqual(result1, {'name': 'My little house'})
+
+        args2 = ['value=42']
+        result2 = self.cmd_testing._key_value_parser(args2)
+        self.assertEqual(result2, {'value': 42})
+
+        args3 = ['price=24.99']
+        result3 = self.cmd_testing._key_value_parser(args3)
+        self.assertEqual(result3, {'price': 24.99})
+
+        args4 = ['name="My_item"', 'quantity=5', 'weight=2.5']
+        result4 = self.cmd_testing._key_value_parser(args4)
+        self.assertEqual(result4, {'name': 'My item', 'quantity': 5, 'weight': 2.5})
+
+    def test_do_create(self):
+        # Mock classes and storage for testing
+        class MockStorage:
+            def save(self, instance):
+                pass
+
+        class MockClass:
+            def __init__(self, **kwargs):
+                self.id = "mock_id"
+         mock_classes = {'MockClass': MockClass}
+        self.cmd_testing.classes = mock_classes
+        self.cmd_testing.storage = MockStorage()
+
+        # Test case 1: Creating a valid instance
+        with unittest.mock.patch('builtins.print') as mock_print:
+            self.cmd_testing.do_create("MockClass name=\"Test_instance\" value=10")
+            mock_print.assert_called_with("mock_id")
+
+        # Test case 2: Creating an instance of non-existent class
+        with unittest.mock.patch('builtins.print') as mock_print:
+            self.cmd_testing.do_create("NonExistentClass param=value")
+            mock_print.assert_called_with("** class doesn't exist **")
+
+        # Test case 3: Missing class name
+        with unittest.mock.patch('builtins.print') as mock_print:
+            self.cmd_testing.do_create("")
+            mock_print.assert_called_with("** class name missing **")
+
 
 if __name__ == "__main__":
     unittest.main()
