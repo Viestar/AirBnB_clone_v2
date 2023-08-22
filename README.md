@@ -1,6 +1,6 @@
 ![AirBnB](./web_static/images/logo.png)
 # Table of contents
-![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
+![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
 
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
@@ -19,5 +19,9 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 [0x11] | [All instances by class name](./console.py) | Updated the console to retrieve all instances of a class by using: <class name>.all().
 [0x12] | [Count instances](./console.py) | Updated the console to retrieve all instances of a class by using: <class name>.count().
 [0x13] | [Show](./console.py) | Updated the console to retrieve all instances of a class on its ID: <class name>.show(<id>).
-[---] | **0x02. AirBnB clone - MySQL** | ---.
+
+
+![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
+TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
+----- | ------ | ---------- 
 [0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and select access on "performance_schema.*"
