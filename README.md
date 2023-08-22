@@ -24,5 +24,5 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
-[0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and select access on "performance_schema.*"
-[0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and select access on "performance_schema.*"
+[0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
+[0x03] | [MySQL setup development](./setup_mysql_test.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_test_db" and User "hbnb_test", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
