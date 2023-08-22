@@ -25,3 +25,4 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
 [0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and select access on "performance_schema.*"
+[0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and select access on "performance_schema.*"
