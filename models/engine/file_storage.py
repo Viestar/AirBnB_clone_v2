@@ -1,63 +1,72 @@
 #!/usr/bin/python3
-""" File storage Class Model"""
-
-
+"""FIle storage manager"""
 import json
-import os
-from models.base_model import BaseModel
-from models.user import User
-from models.city import City
-from models.review import Review
-from models.state import State
-from models.amenity import Amenity
-from models.place import Place
 
 
-class FileStorage():
-    """ Serializes instances to a JSON file and vice versa """
-
-    __file_path = "faith.json"
+class FileStorage:
+    """ File storage manager """
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self, cls=None):
-        """Returns the dictionary __objects of a given class"""
+        """Returns object Dictionary """
         if cls is None:
             return self.__objects
-        else:
-            cls_objects = {}
-            for key, value in self.__objects.items():
-                if isinstance(value, cls):
-                    cls_objects[key] = value
-            return cls_objects
+        cls_name = cls.__name__
+        dictionary = {}
+        for key in self.__objects.keys():
+            if key.split('.')[0] == cls_name:
+                dictionary[key] = self.__objects[key]
+        return dictionary
 
     def new(self, obj):
-        """Sets in __objects the obj with key <obj class name>.id"""
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        """Adds new object to the dictionary"""
+        self.__objects.update(
+            {obj.to_dict()['__class__'] + '.' + obj.id: obj}
+            )
 
     def save(self):
-        """ Serializes a class dict into a JSON file for storage"""
-        with open(self.__file_path, 'w', encoding='utf-8') as viestar:
-            storage_dic = {}
-            for key, value in self.__objects.items():
-                storage_dic[key] = value.to_dict()
-            json.dump(storage_dic, viestar)
+        """Saves dictionary to file"""
+        with open(self.__file_path, 'w') as f:
+            cont = {}
+            cont.update(self.__objects)
+            for key, val in cont.items():
+                cont[key] = val.to_dict()
+            json.dump(cont, f)
 
     def reload(self):
-        """ Deserializes a JSON file into a dictionary """
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r', encoding='utf-8') as faith:
-                for object in json.load(faith).values():
-                    self.new(eval(object["__class__"])(**object))
-        else:
-            # Incase file doesn't exist, return with nothing
-            return
+        """Loads storage dictionary from file"""
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+
+        classes = {
+                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                    'State': State, 'City': City, 'Amenity': Amenity,
+                    'Review': Review
+                  }
+        try:
+            cont = {}
+            with open(self.__file_path, 'r') as f:
+                cont = json.load(f)
+                for key, val in cont.items():
+                    self.all()[key] = classes[val['__class__']](**val)
+        except FileNotFoundError:
+            pass
 
     def delete(self, obj=None):
-        """ Deletes an object if its inside """
-        if obj is not None:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            if key in self.__objects:
-                del self.__objects[key]
-        else:
+        ''' deletes the objects
+        '''
+        if obj is None:
             return
+        object_key = obj.to_dict()['__class__'] + '.' + obj.id
+        if object_key in self.__objects.keys():
+            del self.__objects[object_key]
+
+    def close(self):
+        """Calls the reload function"""
+        self.reload()

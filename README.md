@@ -1,4 +1,4 @@
-> ![AirBnB](./web_static/images/logo.png)
+![AirBnB](./web_static/images/logo.png)
 
 # Table of contents
 
@@ -22,6 +22,35 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 [0x12] | [Count instances](./console.py) | Updated the console to retrieve all instances of a class by using: <class name>.count().
 [0x13] | [Show](./console.py) | Updated the console to retrieve all instances of a class on its ID: <class name>.show(<id>).
 
+> 
+> 
+
+
+>>> # Practising Objectives
+Through this project, you will be able to explain to anyone, without the help of Google:
+
+> # General
+
+>> What is Unit testing and how to implement it in a large project
+
+>> What is *args and how to use it
+
+>> What is **kwargs and how to use it
+
+>> How to handle named arguments in a function
+
+>> How to create a MySQL database
+
+>> How to create a MySQL user and grant it privileges
+
+>> What ORM 
+
+>> How to map a Python Class to a MySQL table
+
+>> How to handle 2 different storage engines with the same codebase
+>> How to use environment variables
+
+# Table of contents
 
 > ![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
 
@@ -29,4 +58,4 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
 [0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
 [0x04] | [MySQL setup development](./setup_mysql_test.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_test_db" and User "hbnb_test", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
-[0x05] | [Delete object](./models/engine/file_storage.py) | Added a new public instance method: def delete(self, obj=None): to delete obj from __objects if it’s inside - if obj is equal to None, the method does nothing. Updated the prototype of def all(self) to def all(self, cls=None) - that returns the list of objects of one type of class.
+[0x05] | [Delete object](./models/engine/file_storage.py) | Added a new public instance method: def delete(self, obj=None): to delete obj from __objects if it’s inside - if obj is equal to None, the method does nothing. Updated the prototype of def all(self) to def all(self, cls=None) - that returns the list of objects of one type of class. R    
