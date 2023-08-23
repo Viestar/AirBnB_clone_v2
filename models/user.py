@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ Model for the User inheriting from the base model """
-
+import models
+import sqlalchemy
+from sqlalchemy import Column, String, Integer
 from models.base_model import BaseModel
 
 
@@ -16,8 +18,12 @@ class User(BaseModel):
         age (int): User age.
 
     """
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
-    age = ""
+
+    __tablename__ = "users"
+
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
+    age = Column(Integer, nullable=True)
+
