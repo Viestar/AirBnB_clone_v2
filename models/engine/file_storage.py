@@ -19,9 +19,16 @@ class FileStorage():
     __file_path = "faith.json"
     __objects = {}
 
-    def all(self):
-        """Returns the dictionary __objects"""
-        return self.__objects
+    def all(self, cls=None):
+        """Returns the dictionary __objects of a given class"""
+        if cls is None:
+            return self.__objects
+        else:
+            cls_objects = {}
+            for key, value in self.__objects.items():
+                if isinstance(value, cls):
+                    cls_objects[key] = value
+            return cls_objects
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id"""
@@ -44,4 +51,13 @@ class FileStorage():
                     self.new(eval(object["__class__"])(**object))
         else:
             # Incase file doesn't exist, return with nothing
+            return
+
+    def delete(self, obj=None):
+        """ Deletes an object if its inside """
+        if obj is not None:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            if key in self.__objects:
+                del self.__objects[key]
+        else:
             return
