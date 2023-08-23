@@ -6,6 +6,8 @@ from models.base_model import Base
 from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+from models import storage_switch
 
 
 class City(BaseModel, Base):
@@ -17,6 +19,12 @@ class City(BaseModel, Base):
         state_id (str): Unique State id.
         name (str): State name.
     """
-    __table__ = "cities"
-    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
-    name = Column(String(128), nullable=False)
+    if storage_switch == "db":
+        __table__ = "cities"
+        state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
+        name = Column(String(128), nullable=False)
+        places = relationship('Place', backref='cities',
+                              cascade='all, delete, delete-orphan')
+    else:
+        state_id = ""
+        name = ""
