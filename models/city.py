@@ -19,8 +19,8 @@ class City(BaseModel, Base):
         state_id (str): Unique State id.
         name (str): State name.
     """
-    if storage_switch == "db":
-        __table__ = "cities"
+    __table__ = "cities"
+    if storage_switch == 'db':
         state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
         name = Column(String(128), nullable=False)
         places = relationship('Place', backref='cities',
