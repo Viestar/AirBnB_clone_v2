@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 """ Model for the place inheriting from the base model """
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from models import storage_switch
 from sqlalchemy import Column, ForeignKey, String, Integer
 from sqlalchemy import Float
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import Table
+from models.amenity import Amenity
+from models.review import Review
+
 
 if storage_switch == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
