@@ -1,6 +1,8 @@
-![AirBnB](./web_static/images/logo.png)
+> ![AirBnB](./web_static/images/logo.png)
+
 # Table of contents
-![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
+
+> ![AirBnB](./assets/Screenshot%20from%202023-07-10%2014-59-47.png)
 
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
@@ -21,8 +23,10 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 [0x13] | [Show](./console.py) | Updated the console to retrieve all instances of a class on its ID: <class name>.show(<id>).
 
 
-![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
+> ![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
+
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 
 [0x03] | [MySQL setup development](./setup_mysql_dev.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_dev_db" and User "hbnb_dev", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
-[0x03] | [MySQL setup development](./setup_mysql_test.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_test_db" and User "hbnb_test", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
+[0x04] | [MySQL setup development](./setup_mysql_test.sql) | Script that prepares a MySQL server for the project by creating the Database "hbnb_test_db" and User "hbnb_test", grants this user all privileges on created database and SELECT rights on "performance_schema.*"
+[0x05] | [Delete object](./models/engine/file_storage.py) | Added a new public instance method: def delete(self, obj=None): to delete obj from __objects if it’s inside - if obj is equal to None, the method does nothing. Updated the prototype of def all(self) to def all(self, cls=None) - that returns the list of objects of one type of class.
