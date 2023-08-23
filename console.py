@@ -11,7 +11,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.state import State
 from models.review import Review
-from models import storage
+from models.__init__ import storage
 
 # A global constant since both functions within and outside uses it.
 classes = {
