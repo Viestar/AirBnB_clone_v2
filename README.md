@@ -22,10 +22,11 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 [0x12] | [Count instances](./console.py) | Updated the console to retrieve all instances of a class by using: <class name>.count().
 [0x13] | [Show](./console.py) | Updated the console to retrieve all instances of a class on its ID: <class name>.show(<id>).
 
+> 
+> 
 
-> ![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
 
-# Practising Objectives
+>>> # Practising Objectives
 Through this project, you will be able to explain to anyone, without the help of Google:
 
 > # General
@@ -50,6 +51,8 @@ Through this project, you will be able to explain to anyone, without the help of
 >> How to use environment variables
 
 # Table of contents
+
+> ![AirBnB](./assets/Screenshot%20from%202023-08-22%2003-01-03.png)
 
 TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 ----- | ------ | ---------- 

@@ -44,17 +44,15 @@ class BaseModel():
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of the instance"""
-        object_dict = self.__dict__.copy()
-        object_dict['__class__'] = self.__class__.__name__
-        for key, value in self.__dict__.items():
-            if key in ("created_at", "updated_at"):
-                value = self.__dict__[key].isoformat()
-            object_dict[key] = value
-        for key, value in object_dict.items():
-            if key == "_sa_instance_state":
-                object_dict.pop(key)
-        return object_dict
-
+        dict = self.__dict__.copy()
+        dict['__class__'] = self.__class__.__name__
+        for key in dict:
+            if type(dict[key]) is datetime:
+                dict[key] = dict[key].isoformat()
+        if '_sa_instance_state' in dict.keys():
+            del(dict['_sa_instance_state'])
+        return dict
+    
     def delete(self):
         """ Deletes current instance from the storage"""
         models.storage.delete()

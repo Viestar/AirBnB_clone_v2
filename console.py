@@ -3,8 +3,7 @@
 import cmd
 import re
 from shlex import split
-
-import models
+import shlex
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -12,17 +11,14 @@ from models.amenity import Amenity
 from models.place import Place
 from models.state import State
 from models.review import Review
+from models import storage
 
 # A global constant since both functions within and outside uses it.
-CLASSES = [
-    "BaseModel",
-    "User",
-    "City",
-    "Place",
-    "State",
-    "Amenity",
-    "Review"
-]
+classes = {
+    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+    'State': State, 'City': City, 'Amenity': Amenity,
+    'Review': Review
+}
 
 
 def parse(arg):
@@ -56,7 +52,7 @@ def check_args(args):
 
     if len(arg_list) == 0:
         print("** class name missing **")
-    elif arg_list[0] not in CLASSES:
+    elif arg_list[0] not in classes:
         print("** class doesn't exist **")
     else:
         return arg_list
@@ -67,7 +63,6 @@ class HBNBCommand(cmd.Cmd):
     for the AirBnB clone web application
     """
     prompt = "(hbnb) "
-    storage = models.storage
 
     def emptyline(self):
         """Command to executed when empty line + <ENTER> key"""
@@ -106,13 +101,39 @@ class HBNBCommand(cmd.Cmd):
         """When executed, exits the console."""
         return True
 
-    def do_create(self, argv):
-        """Creates a new instance of BaseModel, saves it (to a JSON file)
-        and prints the id"""
-        args = check_args(argv)
-        if args:
-            print(eval(args[0])().id)
-            self.storage.save()
+    def do_create(self, args):
+        """ Create an object of any class"""
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        try:
+            args = shlex.split(args)
+            new_instance = eval(args[0])()
+            for i in args[1:]:
+                try:
+                    key = i.split("=")[0]
+                    value = i.split("=")[1]
+                    if hasattr(new_instance, key) is True:
+                        value = value.replace("_", " ")
+                        try:
+                            value = eval(value)
+                        except (ValueError, SyntaxError, NameError):
+                            pass
+                        setattr(new_instance, key, value)
+                except (ValueError, IndexError):
+                    pass
+            new_instance.save()
+            print(new_instance.id)
+        except NameError:
+            print("** class doesn't exist **")
+            return
+    # def do_create(self, argv):
+    #     """Creates a new instance of BaseModel, saves it (to a JSON file)
+    #     and prints the id"""
+    #     args = check_args(argv)
+    #     if args:
+    #         print(eval(args[0])().id)
+    #         self.storage.save()
 
     def do_show(self, argv):
         """Prints the string representation of an instance based
@@ -136,7 +157,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg_list:
             print([str(obj) for obj in objects])
         else:
-            if arg_list[0] not in CLASSES:
+            if arg_list[0] not in classes:
                 print("** class doesn't exist **")
             else:
                 print([str(obj) for obj in objects
@@ -186,7 +207,7 @@ class HBNBCommand(cmd.Cmd):
         """Retrieve the number of instances of a class"""
         arg1 = parse(arg)
         count = 0
-        for obj in models.storage.all().values():
+        for obj in storage.all().values():
             if arg1[0] == type(obj).__name__:
                 count += 1
         print(count)
