@@ -59,4 +59,4 @@ class BaseModel():
 
     def __str__(self) -> str:
         """Returns: [class name] (ID) <class dictionary>"""
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        return "[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
