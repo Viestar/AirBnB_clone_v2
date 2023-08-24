@@ -50,9 +50,9 @@ class BaseModel():
             if type(dict[key]) is datetime:
                 dict[key] = dict[key].isoformat()
         if '_sa_instance_state' in dict.keys():
-            del(dict['_sa_instance_state'])
+            del (dict['_sa_instance_state'])
         return dict
-    
+
     def delete(self):
         """ Deletes current instance from the storage"""
         models.storage.delete()
