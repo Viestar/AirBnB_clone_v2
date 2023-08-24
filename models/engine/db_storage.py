@@ -26,7 +26,7 @@ class DBStorage:
         """ Instantiates the databae engine """
         self.__engine = create_engine(f"mysql+mysqldb:// \
         {gv('HBNB_MYSQL_USER')}:{gv('HBNB_MYSQL_PWD')}@ \
-        '{gv('HBNB_MYSQL_HOST')}'/{gv('HBNB_MYSQL_DB')}", pool_pre_ping=True)
+        {gv('HBNB_MYSQL_HOST')}/{gv('HBNB_MYSQL_DB')}", pool_pre_ping=True)
 
         if gv('HBNB_ENV') == "test":
             Base.metadata.drop_all(self.__engine)
