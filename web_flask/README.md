@@ -12,3 +12,4 @@ TASK NUMBER | LINK TO TASK CODE | TASK DESCRIPTION-
 [0x02] | [HBNB](./1-hbnb_route.py) | Python script that starts a Flask web application running through port 5000 on localhost with two routes.
 [0x03] | [C is fun!](./2-c_route.py) | Python script that starts a Flask web application running through port 5000 on localhost with three routes taking in a text variable and returning it via  the HTML.
 [0x04] | [Python is cool!](./3-python_route.py) | Python script that starts a Flask web application running through port 5000 on localhost with three routes taking in a text variable or using a default value and returning it via  the HTML.
+[0x05] | [Is it a number?](./3-python_route.py) | Python script that starts a Flask web application running through port 5000 on localhost with three routes taking a number and returning it via the HTML if its an integer.
