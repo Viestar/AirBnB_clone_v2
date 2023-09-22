@@ -47,10 +47,10 @@ def number_template(n):
     return render_template('5-number.html', n=n)
 
 
-@app.route('/number_odd_or_even/<n>', strict_slashes=False)
-def number_template_odd_even(n):
-    """display a HTML page if n is an int and either even or odd"""
-    return render_template('6-number.html', n=n)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_odd_or_even(n):
+    """display a HTML page if n is int"""
+    return render_template('6-number_odd_or_even.html', n=n)
 
 
 if __name__ == "__main__":
