@@ -35,18 +35,16 @@ def python_variable(text='is cool'):
     return f'Python {formatted_text}'
 
 
-@app.route('/number/<n>', strict_slashes=False)
-def python_number(n):
-    """ Returns default html with a passed string """
-    if int(n):
-        return f'{n} is a number'
+@app.route('/number/<int:n>', strict_slashes=False)
+def number_n(n):
+    """display n if integer"""
+    return "%i is a number" % n
 
 
-@app.route('/number_template/<n>', strict_slashes=False)
-def python_number_template(n):
-    """ Returns default html with a passed string """
-    if int(n):
-        return render_template('5-number.html', n=n)
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_template(n):
+    """display a HTML page if n is an int"""
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
