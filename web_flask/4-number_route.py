@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Flask Web framework with two routes running on localhost port 5000 """
 
-from flask import Flask
+from flask import Flask, render_template
 
 # Creating a Flask instance.
 app = Flask(__name__)
@@ -35,11 +35,10 @@ def python_variable(text='is cool'):
     return f'Python {formatted_text}'
 
 
-@app.route('/number/<n>', strict_slashes=False)
-def python_number(n):
-    """ Returns default html with a passed string """
-    if int(n):
-        return f'{n} is a number'
+@app.route('/number/<int:n>', strict_slashes=False)
+def number_n(n):
+    """display n if integer"""
+    return "%i is a number" % n
 
 
 if __name__ == "__main__":
