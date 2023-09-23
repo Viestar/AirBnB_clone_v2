@@ -1,36 +1,29 @@
 #!/usr/bin/python3
-""" Model for the state inheriting from the base model """
-
-from models.base_model import BaseModel
-from models.base_model import Base
-from sqlalchemy import Column
-from sqlalchemy import String
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
-import models
-from os import getenv
+""" State Module for HBNB project """
+from models.base_model import BaseModel, Base
+from models import storage_type
 from models.city import City
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 
-class State(BaseModel):
-    """
-    The State model
-
-    Argument:
-        __table__: Database table name
-        name (str): State name.
-    """
-
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        __table__ = "states"
+class State(BaseModel, Base):
+    """ State class / table model"""
+    __tablename__ = 'states'
+    if storage_type == 'db':
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state", cascade="delete")
+        cities = relationship('City', backref='state',
+                              cascade='all, delete, delete-orphan')
     else:
+        name = ''
+
         @property
         def cities(self):
-            """Fetchees related City objects from file storage."""
-            cities_list = []
-            for city in list(models.storage.all(City).values()):
+            '''return the list of City objects from storage linked to the current State'''
+            from models import storage
+            related_cities = []
+            cities = storage.all(City)
+            for city in cities.values():
                 if city.state_id == self.id:
-                    cities_list.append(city)
-            return cities_list
+                    related_cities.append(city)
+            return related_cities

@@ -1,17 +1,16 @@
 #!/usr/bin/python3
-""" Model for the place inheriting from the base model """
+""" Place Module for HBNB project """
 
-from models.base_model import BaseModel, Base
-from models import storage_switch
-from sqlalchemy import Column, ForeignKey, String, Integer
-from sqlalchemy import Float
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import Table
 from models.amenity import Amenity
 from models.review import Review
+from models.base_model import BaseModel, Base
+from models import storage_type
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.sql.schema import Table
+from sqlalchemy.orm import relationship
 
 
-if storage_switch == 'db':
+if storage_type == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id'),
@@ -24,25 +23,10 @@ if storage_switch == 'db':
                           )
 
 
-class Place(BaseModel):
-    """
-    The Place model
-
-    Arguments:
-        city_id (str): Unique City id.
-        user_id (str): Unique user id.
-        name (str): Place name.
-        description (str): Place Description.
-        number_rooms (int): Number of the rooms.
-        number_bathrooms (int): Number of bathrooms.
-        max_guest (int): Maximum number of guests.
-        price_by_night (int): Price by night.
-        latitude (float): Place latitude.
-        longitude (float): Place longitude.
-        amenity_ids (list): A list of Amenity ids.
-    """
+class Place(BaseModel, Base):
+    """ A place to stay """
     __tablename__ = 'places'
-    if storage_switch == 'db':
+    if storage_type == 'db':
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)

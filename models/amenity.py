@@ -1,20 +1,14 @@
 #!/usr/bin/python3
-""" Model for the amenity inheriting from the base model """
-
+""" State Module for HBNB project """
 from models.base_model import BaseModel, Base
-from models import storage_switch
+from models import storage_type
 from sqlalchemy import Column, String
 
 
 class Amenity(BaseModel, Base):
-    """
-    The Amenity model
-
-    Argument:
-        name (str): Amenity name.
-    """
-    __tablename__ = "amenities"
-    if storage_switch == 'db':
+    '''amenity class'''
+    __tablename__ = 'amenities'
+    if storage_type == 'db':
         name = Column(String(128), nullable=False)
     else:
         name = ""
