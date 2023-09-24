@@ -39,7 +39,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        '''query on the current db session all cls objects'''
+        ''' Queries the current db session all objects '''
         dct = {}
         if cls is None:
             for c in classes.values():

@@ -19,11 +19,11 @@ class State(BaseModel, Base):
 
         @property
         def cities(self):
-            '''return the list of City objects from storage => current State'''
+            '''returns a City objects list from storage =>current State'''
             from models import storage
-            related_cities = []
+            linked_cities = []
             cities = storage.all(City)
             for city in cities.values():
                 if city.state_id == self.id:
-                    related_cities.append(city)
-            return related_cities
+                    linked_cities.append(city)
+            return linked_cities
