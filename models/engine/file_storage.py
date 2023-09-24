@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
@@ -22,7 +23,7 @@ class FileStorage:
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.__objects.update(
-            {obj.to_dict()['__class__'] + '.' + obj.id: obj}
+            {f"{obj.to_dict()['__class__']}.{obj.id}": obj}
             )
 
     def save(self):
