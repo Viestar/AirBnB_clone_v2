@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+"""This module defines a base class for all models in our hbnb clone """
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DATETIME
-from models import storage_type
+from models import storage_switch
 
 Base = declarative_base()
 
@@ -40,7 +40,7 @@ class BaseModel:
                     setattr(self, k, datetime.fromisoformat(kwargs[k]))
                 elif k != '__class__':
                     setattr(self, k, kwargs[k])
-            if storage_type == 'db':
+            if storage_switch == 'db':
                 if not hasattr(kwargs, 'id'):
                     setattr(self, 'id', str(uuid.uuid4()))
                 if not hasattr(kwargs, 'created_at'):
@@ -50,8 +50,10 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
+        plain_dict = self.__dict__.copy()
+        plain_dict.pop("_sa_instance_state", None)
         return '[{}] ({}) {}'.format(
-            self.__class__.__name__, self.id, self.__dict__)
+            self.__class__.__name__, self.id, plain_dict)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
